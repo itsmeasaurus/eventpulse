@@ -1,0 +1,35 @@
+models:
+  Conference:
+    name: string
+    description: string
+    start_date: datetime
+    end_date: datetime
+    status: string
+    timezone: string
+
+  Speaker:
+    name: string
+    bio: text
+    twitter_handle: string
+    email: string
+    relationships:
+      belongsToMany: Conference, Talk
+
+  Category:
+    name: string
+    description: text
+    relationships:
+      hasMany: Talk
+
+  Talk:
+    title: string
+    description: text
+    conference_id: unsigned integer
+    speaker_id: unsigned integer
+    category_id: unsigned integer
+    relationships:
+      belongsTo: Speaker, Conference, Category
+
+
+controllers:
+  # ...
