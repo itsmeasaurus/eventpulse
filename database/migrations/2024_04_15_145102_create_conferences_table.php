@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('conferences', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('description');
+            $table->string('name', 60);
+            $table->text('description');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->string('status');

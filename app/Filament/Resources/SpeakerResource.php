@@ -30,6 +30,8 @@ class SpeakerResource extends Resource
                     ->required()
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('twitter_handle')
+                    ->label('Twitter Profile')
+                    ->prefix('https://twitter.com/')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('email')

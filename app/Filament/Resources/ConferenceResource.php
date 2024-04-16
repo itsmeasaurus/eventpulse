@@ -24,21 +24,47 @@ class ConferenceResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label('Conference')
                     ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('description')
-                    ->required()
-                    ->maxLength(255),
+                    ->maxLength(60),
+                Forms\Components\Textarea::make('description')
+                    ->label('What is the conference about?')
+                    ->required(),
                 Forms\Components\DateTimePicker::make('start_date')
+                    ->native(false)
+                    ->default(now())
+                    ->closeOnDateSelection()
                     ->required(),
                 Forms\Components\DateTimePicker::make('end_date')
+                    ->native(false)
+                    ->closeOnDateSelection()
                     ->required(),
-                Forms\Components\TextInput::make('status')
+                Forms\Components\Select::make('status')
                     ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('timezone')
+                    ->options([
+                        'finished' => 'Finished',
+                        'waiting' => 'Waiting',
+                        'current' => 'Current'
+                    ]),
+                Forms\Components\Select::make('timezone')
                     ->required()
-                    ->maxLength(255),
+                    ->options([
+                        "utc" => "UTC",
+                        "gmt" => "GMT",
+                        "bst" => "BST",
+                        "cet" => "CET",
+                        "cest" => "CEST",
+                        "eet" => "EET",
+                        "eest" => "EEST",
+                        "est" => "EST",
+                        "edt" => "EDT",
+                        "cst" => "CST",
+                        "cdt" => "CDT",
+                        "mst" => "MST",
+                        "mdt" => "MDT",
+                        "pst" => "PST",
+                        "pdt" => "PDT",
+                    ])
             ]);
     }
 
