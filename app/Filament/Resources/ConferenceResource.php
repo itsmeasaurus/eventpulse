@@ -2,11 +2,15 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\Region;
 use App\Filament\Resources\ConferenceResource\Pages;
 use App\Filament\Resources\ConferenceResource\RelationManagers;
 use App\Models\Conference;
+use App\Models\Venue;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -64,7 +68,18 @@ class ConferenceResource extends Resource
                         "mdt" => "MDT",
                         "pst" => "PST",
                         "pdt" => "PDT",
-                    ])
+                    ]),
+                Forms\Components\Select::make('region')
+                    ->live()
+                    ->enum(Region::class)
+                    ->options(Region::class),
+                Forms\Components\Select::make('venue_id')
+                    ->searchable()
+                    ->preload()
+                    ->createOptionForm(Venue::getForm())
+                    ->relationship('venue', 'name', modifyQueryUsing: function(Builder $query, Get $get) {
+                        return $query->where('region', $get('region'));
+                    })
             ]);
     }
 

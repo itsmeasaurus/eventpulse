@@ -2,11 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\Category;
-use App\Models\Conference;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models;
+use App\Models\;
 use App\Models\Speaker;
 use App\Models\Talk;
 
@@ -27,9 +25,9 @@ class TalkFactory extends Factory
         return [
             'title' => $this->faker->sentence(4),
             'description' => $this->faker->text(),
-            'conference_id' => Conference::factory(),
+            'conference_id' => ::factory(),
             'speaker_id' => Speaker::factory(),
-            'category_id' => Category::factory(),
+            'category_id' => ::factory(),
         ];
     }
 }

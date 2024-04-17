@@ -6,6 +6,18 @@ models:
     end_date: datetime
     status: string
     timezone: string
+    region: string
+    relationships:
+      belongsTo: Venue
+
+  Venue:
+    name: string
+    city: string
+    postal_code: string
+    region: string
+    relationships:
+      belongsToMany: Conference
+
 
   Speaker:
     name: string
