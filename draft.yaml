@@ -9,6 +9,7 @@ models:
     region: string
     relationships:
       belongsTo: Venue
+      belongsToMany: Speaker, Talk
 
   Venue:
     name: string
@@ -24,6 +25,7 @@ models:
     bio: text
     twitter_handle: string
     email: string
+    qualification: json
     relationships:
       belongsToMany: Conference, Talk
 
