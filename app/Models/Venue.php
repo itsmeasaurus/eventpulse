@@ -32,9 +32,6 @@ class Venue extends Model
             TextInput::make('city')
                 ->required()
                 ->maxLength(255),
-            TextInput::make('country')
-                ->required()
-                ->maxLength(255),
             TextInput::make('postal_code')
                 ->required()
                 ->maxLength(255),

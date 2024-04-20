@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('bio');
             $table->string('twitter_handle');
             $table->string('email');
+            $table->json('qualification');
             $table->timestamps();
         });
     }

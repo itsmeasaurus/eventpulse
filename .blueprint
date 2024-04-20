@@ -4,14 +4,15 @@ created:
     - database/factories/SpeakerFactory.php
     - database/factories/CategoryFactory.php
     - database/factories/TalkFactory.php
-    - database/migrations/2024_04_17_153946_create_conferences_table.php
-    - database/migrations/2024_04_17_153947_create_venues_table.php
-    - database/migrations/2024_04_17_153948_create_speakers_table.php
-    - database/migrations/2024_04_17_153949_create_categories_table.php
-    - database/migrations/2024_04_17_153950_create_talks_table.php
-    - database/migrations/2024_04_17_153951_create_conference_venue_table.php
-    - database/migrations/2024_04_17_153952_create_conference_speaker_table.php
-    - database/migrations/2024_04_17_153953_create_speaker_talk_table.php
+    - database/migrations/2024_04_20_162323_create_conferences_table.php
+    - database/migrations/2024_04_20_162324_create_venues_table.php
+    - database/migrations/2024_04_20_162325_create_speakers_table.php
+    - database/migrations/2024_04_20_162326_create_categories_table.php
+    - database/migrations/2024_04_20_162327_create_talks_table.php
+    - database/migrations/2024_04_20_162328_create_conference_speaker_table.php
+    - database/migrations/2024_04_20_162329_create_conference_talk_table.php
+    - database/migrations/2024_04_20_162330_create_conference_venue_table.php
+    - database/migrations/2024_04_20_162331_create_speaker_talk_table.php
     - app/Models/Conference.php
     - app/Models/Venue.php
     - app/Models/Speaker.php
@@ -19,8 +20,8 @@ created:
     - app/Models/Talk.php
 models:
     User: { name: string, email: string, email_verified_at: 'timestamp nullable', password: string, remember_token: 'string:100 nullable' }
-    Conference: { name: string, description: string, start_date: datetime, end_date: datetime, status: string, timezone: string, region: string, relationships: { belongsTo: Venue } }
-    Venue: { name: string, city: string, country: string, postal_code: string, region: string, relationships: { belongsToMany: Conference } }
+    Conference: { name: string, description: string, start_date: datetime, end_date: datetime, status: string, timezone: string, region: string, relationships: { belongsTo: Venue, belongsToMany: 'Speaker, Talk' } }
+    Venue: { name: string, city: string, postal_code: string, region: string, relationships: { belongsToMany: Conference } }
     Speaker: { name: string, bio: text, twitter_handle: string, email: string, relationships: { belongsToMany: 'Conference, Talk' } }
     Category: { name: string, description: text, relationships: { hasMany: Talk } }
     Talk: { title: string, description: text, conference_id: 'unsigned integer', speaker_id: 'unsigned integer', category_id: 'unsigned integer', relationships: { belongsTo: 'Speaker, Conference, Category' } }

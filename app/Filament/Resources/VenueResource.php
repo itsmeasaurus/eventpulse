@@ -34,8 +34,6 @@ class VenueResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('city')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('country')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('postal_code')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('region')
