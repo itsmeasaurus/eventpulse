@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('status');
             $table->string('timezone');
             $table->string('region');
-            $table->foreignId('venue_id');
+            $table->foreignId('venue_id')->nullable();
             $table->timestamps();
         });
     }
