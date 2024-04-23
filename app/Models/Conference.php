@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Enums\Region;
+use Filament\Forms\Components\Actions;
+use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Fieldset;
@@ -74,12 +76,28 @@ class Conference extends Model
                             Select::make('status')
                                 ->required()
                                 ->options([
-                                    'finished' => 'Finished',
-                                    'waiting' => 'Waiting',
-                                    'current' => 'Current'
+                                    'draft' => 'Draft',
+                                    'pending' => 'Pending',
+                                    'finished' => 'Finished'
                                 ]),
                         ]),
                     
+            ]),
+            Actions::make([
+                Action::make('Generate Data')
+                    ->visible(function (string $operation) {
+                        if($operation !== 'create') {
+                            return false;
+                        }
+                        if(! app()->environment('local')) {
+                            return false;
+                        }
+                        return true;
+                    })
+                    ->action(function ($livewire) {
+                        $data = Conference::factory()->make()->toArray();
+                        $livewire->form->fill($data);
+                    }),
             ]),
             Section::make('Time and Location')
                 ->schema([
@@ -89,18 +107,6 @@ class Conference extends Model
                             "utc" => "UTC",
                             "gmt" => "GMT",
                             "bst" => "BST",
-                            "cet" => "CET",
-                            "cest" => "CEST",
-                            "eet" => "EET",
-                            "eest" => "EEST",
-                            "est" => "EST",
-                            "edt" => "EDT",
-                            "cst" => "CST",
-                            "cdt" => "CDT",
-                            "mst" => "MST",
-                            "mdt" => "MDT",
-                            "pst" => "PST",
-                            "pdt" => "PDT",
                         ]),
                     Select::make('region')
                         ->live()
